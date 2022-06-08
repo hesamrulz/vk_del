@@ -50,7 +50,7 @@ while (true)
             var getHistory = api.Messages.GetHistory(new MessagesGetHistoryParams
             {
                 PeerId = pier_id,
-                Count = 2
+                Count = 5
             });
             foreach (var message in getHistory.Messages)
             {
@@ -70,8 +70,7 @@ while (true)
         catch
         {
             Console.WriteLine("Произошла ошибка, возможно у юзера права администратора, либо у вас нет прав!!!");
-            Console.Write("Нажмите Enter чтобы продолжить>>>");
-            Console.ReadLine();
+           continue;
         }
     }
     }
