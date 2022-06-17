@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.IO;
+using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using VkNet;
@@ -41,8 +43,8 @@ while (true)
     {
         continue;
     }
-        while (true)
-        {
+    while (true)
+    {
         try
         {
             Thread.Sleep(1000);
@@ -64,13 +66,18 @@ while (true)
                     {"peer_id", (ulong)message.PeerId}
                           });
                     Console.WriteLine($"DELETED Message:{message.FromId}: {message.Text}");
+                    using (var file = new StreamWriter("log.txt", true))
+                    {
+                        file.WriteLine($"{DateTime.Now}{message.FromId}:{message.Text}");
+                        file.Close();
+                    }
                 }
             }
         }
         catch
         {
             Console.WriteLine("Произошла ошибка, возможно у юзера права администратора, либо у вас нет прав!!!");
-           continue;
+            continue;
         }
     }
-    }
+}
